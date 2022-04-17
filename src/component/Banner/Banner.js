@@ -3,6 +3,7 @@ import './Banner.css'
 import { Button } from '@material-ui/core'
 import Search from  '../Search/Search.js'
 import { useHistory } from 'react-router-dom'; 
+import { Header } from '../Header/Header';
 
 function Banner() {
     const history = useHistory();

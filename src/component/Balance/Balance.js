@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { AuthService } from '..';
+import { Header } from '../index'
 
 function Balance() {
     const [cbalance, setBalance] = useState(250)
@@ -17,6 +18,7 @@ function Balance() {
     }
   return (
     <div>
+        <Header />
         <h1> {cbalance} </h1>
         {/* <button onClick = {()=>{balance()}} ></button> */}
     </div>
