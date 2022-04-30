@@ -1,0 +1,38 @@
+.reward{
+    background-image: url('../../Asset/balance.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: auto;
+    top: 105px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.reward > h2{
+    background-color: seashell;
+}
+
+.card_class{
+    margin: 20%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+    transition: transform 100ms ease-in;
+    cursor: pointer;
+    background: seashell;
+    font-family: 'Andada Pro', serif;
+    font-family: 'Raleway', sans-serif;
+    height: 25%;
+    top:30%;
+}
+
+.card_class > h2{
+    margin-left: 10%;
+}
+.card_class > span{
+    margin-left: 50%;
+    font-size: 30px;
+}

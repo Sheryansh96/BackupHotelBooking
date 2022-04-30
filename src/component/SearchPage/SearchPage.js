@@ -7,6 +7,8 @@ import "react-date-range/dist/theme/default.css";
 import { Header } from '..';
 function SearchPage() {
   return (
+      <div>
+          <Header/>
     <div className='searchPage'>
             <h2>Select Dates</h2>
             <div className='searchPage__info'>
@@ -80,6 +82,7 @@ function SearchPage() {
                 total="£650 total"
             /> */}
 
+        </div>
         </div>
   )
 }

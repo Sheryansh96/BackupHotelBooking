@@ -8,6 +8,7 @@ import RoomServiceIcon from '@mui/icons-material/RoomService';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
+import { Header } from '..'
 
 function Update() {
 
@@ -213,6 +214,7 @@ function Update() {
 
   return (
     <div>
+      <Header/>
         <div className = "card_update">
         <h2>Current Booking</h2>
         <br></br>

@@ -10,15 +10,17 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Axios from 'axios';
 import AuthService from '../User_auth';
 import validator from 'validator';
+import { useHistory } from 'react-router-dom'; 
 import { Header } from '..';
 
-const Signup = () => {
+const EmployeeSignup = () => {
     const [userName, setuserNameReg] = useState("");
     const [userPassword, setuserPassword] = useState("");
     const [userGender, setGender] = useState("");
     const [userPhoneno, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [succesful, setSuccesfull] = useState(false);
+    const history = useHistory();
 
     const paperStyle = { padding: '30px 20px', width: 300, margin: "20px auto" }
     const headerStyle = { margin: 0 }
@@ -36,18 +38,18 @@ const Signup = () => {
             window.alert("Please enter valid Email")
             return
         }
-        AuthService.register(userName, email, userPassword, userPhoneno).then(
-            console.log("done")
+        AuthService.employeeregister(userName, email, userPassword, userPhoneno).then(
+            history.push('/employeelogin') 
         ).catch((error) => {
             // Error
             if (error.response) {
-                window.alert("Enter correct email/password")
+                window.alert(error.response)
             } else if (error.request) {
-                window.alert("Enter correct email/password")
+                window.alert(error.request)
                 console.log(error.request);
             } else {
                 // Something happened in setting up the request that triggered an Error
-                window.alert("Enter correct email/password")
+                window.alert(error.message)
                 console.log('Error', error.message);
             }
             console.log(error.config);
@@ -63,7 +65,7 @@ const Signup = () => {
                     <Avatar style={avatarStyle}>
                         <AddCircleOutlineOutlinedIcon />
                     </Avatar>
-                    <h2 style={headerStyle}>Sign Up</h2>
+                    <h2 style={headerStyle}>Employee Sign Up</h2>
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                 </Grid>
                 <form>
@@ -91,4 +93,4 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+export default EmployeeSignup;

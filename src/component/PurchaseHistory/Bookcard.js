@@ -4,28 +4,54 @@ import './bookcard.css';
 import { DateRangePicker } from 'react-date-range';
 import Details from '../SearchResult/Details';
 import { useHistory } from 'react-router-dom'; 
+import AuthService from '../User_auth';
 
-function Bookcard({ src, title, description, price }) {
+function Bookcard({ src, title, to_date, from_date, description }) {
   const [showSearch, setShowSearch] = useState(false);
   const history = useHistory();
 
   const update = () => {
     history.push( {pathname: '/update',
-    search: `?query=${title}`}) 
+    search: `?query=${description}`}) 
   }
+
+  const cancel = () => {
+    AuthService.getCancelBooking(description).then(
+      () => { 
+       history.push('/') 
+          
+       //window.location.href = "/";
+       // return <Redirect to ="/"/>
+      }).catch((error) => {
+      // Error
+      if (error.response) {
+          window.alert(error.response)
+      } else if (error.request) {
+          window.alert(error.request)
+          console.log(error.request);
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          window.alert(error.message)
+          console.log('Error', error.message);
+      }
+      console.log(error.config);
+  });
+  }
+
   return (
     <div className='card'>
-            <img src={src} alt="" />
-            <div className="card__info">
-                <h2>{title}</h2>
-                <h4>{description}</h4>
-                <h3>{price}</h3>
-            </div>
-            <span>
-            <Button onClick ={update} >Update</Button>
-            </span>
-            <Button>Cancel</Button>
-        </div>
+    <img src="https://a0.muscache.com/im/pictures/fdb46962-10c1-45fc-a228-d0b055411448.jpg?im_w=720" alt="" />
+    <div className="card__info">
+        <h2>Room Type : {src}</h2>
+        <h4>From : {from_date}</h4>
+        <h4>To : {to_date}</h4>
+        <h5>Id : {description}</h5>
+    </div>
+    <span>
+    <Button onClick ={update} >Update</Button>
+    </span>
+    <Button onClick ={cancel}>Cancel</Button>
+    </div>
   )
 }
 

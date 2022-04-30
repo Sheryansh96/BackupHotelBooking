@@ -4,6 +4,9 @@
     padding: 20px;
     box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
     color: #ff7779;
+    background-image: url('../../Asset/ff.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .cardupdate__info {

@@ -13,3 +13,7 @@ export { default as Balance } from './Balance/Balance';
 export { default as Employee } from './EmployeePage/EmployeePage';
 export { default as Bookingdetails } from './PurchaseHistory/Bookingdetails';
 export { default as Update } from './Update/Update';
+export { default as Modal } from './Modal/Modal';
+export { default as EmployeeLogin } from './EmployeeValidate/EmployeeLogin';
+export { default as EmployeeSignup } from './EmployeeValidate/EmployeeSignup';
+export { default as EmployeeAdd } from './EmployeePage/EmployeeAdd';

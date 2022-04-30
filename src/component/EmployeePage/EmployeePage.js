@@ -1,5 +1,10 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
+import { Header } from "..";
+import { useHistory } from 'react-router-dom'; 
+import './EmployeePage.css';
+import AuthService from '../User_auth';
 
 function Employee() {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -7,9 +12,24 @@ function Employee() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const history = useHistory();
 
     useEffect(() => {
-      getBookingHistory();
+      //getBookingEmployee();
+      AuthService.getBookingEmployee().then(
+        (x) => {
+          console.log(x.data)
+          setBookingHistory(x.data)
+        },
+        error => {
+            const resMessage =
+            (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+            error.message ||
+            error.toString();
+        }
+    )
     }, []);
 
     const getBookingHistory = () => {
@@ -30,23 +50,17 @@ function Employee() {
         ]
         setBookingHistory(history);
     }
-
-  let renderPurchases = null;
-  if (bookingHistory.length === 0) {
-    renderPurchases = () => {
-      return <div>No bookings till now...</div>;
-    };
-  } else {
-    renderPurchases = bookingHistory.map((pro) => {
+    const users=bookingHistory.map((pro)=>{
       return (
-        <div style={{width:"50%", marginLeft:"20%"}}  className="home_cards col-md-4 mb-4">
+        <div>
+        <div style={{width:"50%", marginLeft:"20%", marginBottom:"50px"}}  className="home_cards col-md-4 mb-4">
           <div className="home_card card">
             <div
               className="purchase_item_header"
-              style={{backgroundColor:"rgb(241 161 162)", height:"40px"}}
+              style={{backgroundColor:"#ff7779", height:"40px", padding:"10px", marginBottom:"10px"}}
             >
               <h4 style={{ width: "100%", color: "white"}} className="purchase_item_price">
-                Room No.: {pro.roomNumber}
+                Room Type.: {pro.roomType}
               </h4><br></br>
             </div>
 
@@ -59,34 +73,48 @@ function Employee() {
                 <h5 style={{marginTop:"5px" }}> Customer Name: </h5>
                 <p className="card-title"> {pro.customerName} </p>
                 <h5 style={{marginTop:"5px" }}> Check-in Date: </h5>
-                <p className="card-title">  {pro.checkIn} </p>
+                <p className="card-title">  {pro.fromDate} </p>
                 <h5 style={{marginTop:"5px" }}> Expected Checkout Date:</h5>
-                <p className="card-title"> {pro.expectedCheckout} </p>
+                <p className="card-title"> {pro.toDate} </p>
+                <h5 style={{marginTop:"5px" }}> Number of Adults:</h5>
+                <p className="card-title"> {pro.number_of_adults ? pro.number_of_adults: 0 } </p>
+                <h5 style={{marginTop:"5px" }}> Number of Childen:</h5>
+                <p className="card-title"> {pro.number_of_children ? pro.number_of_children: 0} </p>
 
               </div>
             </div>
           </div>
+        </div>
+        </div>
+      )
+      
+    })
+
+
+    const newHotel = () => {
+      history.push('/employeeadd') 
+    }
+
+
+  let renderPurchases = null;
+  if (bookingHistory.length === 0) {
+    renderPurchases = () => {
+      return <div>No bookings till now...</div>;
+    };
+  } else {
+      return (
+        <div>
+        <Header />
+        <div className = "employeepage">
+          <h2>These are the current bookings</h2>
+          <div>
+            {users}
+          </div>
+          <Button type='submit' variant='contained' onClick ={newHotel} color='#ff7779'>New Hotel</Button>
+        </div>
         </div>
       );
-    });
   }
-
-  return (
-    <div>
-      <div>
-        <h1 style={{ marginLeft: "30px", color: "#ff7779" }}> Bookings in the Hotel </h1>
-        <div className="profile_favourites">
-          <div className="container-fluid mx-1">
-            <div className="row mt-5 mx-1">
-              <div className="col-md-9">
-                <div className="row"> {renderPurchases} </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 export default Employee;

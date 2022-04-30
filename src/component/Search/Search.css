@@ -50,10 +50,10 @@
 
 .dropdown{
     position: absolute;
-    left: 15%;
-    top: 31px;
+    left: 40%;
+    top: 0px;
     text-transform: inherit !important;
-    background-color: #ff7779;
+    background-color: white;
     color: white;
 }
 

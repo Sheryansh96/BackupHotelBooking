@@ -3,7 +3,7 @@ import './Search.css'
 import { DateRangePicker } from 'react-date-range'
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { Button } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import PeopleIcon from "@material-ui/icons/People";
 import { useHistory } from 'react-router-dom'; 
 import Axios from 'axios'
@@ -15,6 +15,7 @@ function Search() {
     const [endDate, setEndDate] = useState(new Date());
     const [location, setLocation ] = useState("");
     const handleLocChange = (event) => {
+      console.log(event.target.value)
       setLocation(event.target.value);
     };
     const selectionRange = {
@@ -27,22 +28,41 @@ function Search() {
         setEndDate(ranges.selection.endDate);
     }
     const details = () => {
-      if(!AuthService.validUser()){
-        history.push('/')
-      }
-      else{
-      history.push('/search')
-      Axios.post("http://localhost:3001/hotel",{
-      startdate: startDate,
-      enddate : endDate,
-      location : location
-    }).then((response) => {
-        console.log(response)
-    })}
+      // if(!AuthService.validUser()){
+      //   history.push('/')
+      // }
+      // else{
+        console.log(location)
+        AuthService.getHotelLocation(location).then(
+          (x) => {
+            console.log(x)
+            history.push('/search')
+           }).catch((error) => {
+           // Error
+           if (error.response) {
+               window.alert("No Hotels in this location")
+           } else if (error.request) {
+               window.alert("No Hotels in this location")
+               console.log(error.request);
+           } else {
+               // Something happened in setting up the request that triggered an Error
+               window.alert("No Hotels in this location")
+               console.log('Error', error.message);
+           }
+           console.log(error.config);
+       });   
+      // Axios.post("http://localhost:3001/hotel",{
+      // startdate: startDate,
+      // enddate : endDate,
+      // location : location
+      // }).then((response) => {
+      //   console.log(response)
+      // })
+      //}
     }
   return (
     <div className='search'>
-      <Dropdown
+      {/* <Dropdown
         label="Where to stay?"
         options={[
           { label: 'London', value: 'London' },
@@ -51,8 +71,18 @@ function Search() {
         ]}
         value={location}
         onChange={handleLocChange}
-      />
-      <Button onClick={details}>Search AirBNB</Button>
+      /> */}
+      <TextField
+        className = "dropdown"
+        id="first-name"
+        label="Type here"
+        placeholder = "Enter Location"
+        value= {location}
+        onChange= {handleLocChange}
+        //margin="normal"
+        //onChange = {(e)=> {handleLocChange(e.target.value)}} required
+        />
+      <Button onClick={details}>Search HOTELA</Button>
     </div>
   )
 }

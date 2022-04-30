@@ -9,7 +9,7 @@ import RoomServiceIcon from '@mui/icons-material/RoomService';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import AuthService from '../User_auth';
 import { useHistory } from 'react-router-dom';
-
+import { Modal } from '..';
 function Details() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -22,6 +22,7 @@ function Details() {
     const [rooms, setRooms] = useState(1);
     const [child, setChild] = useState(1);
     const [adult,setAdult] = useState(1);
+    const [price, setPrice] = useState("");
     const history = useHistory();
 
     
@@ -116,12 +117,6 @@ function Details() {
         setAdult(--v2)
       }
     }
-
-
-
-
-
-
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
@@ -132,6 +127,11 @@ function Details() {
         setEndDate(ranges.selection.endDate);
     }
 
+    const [modal, setModal] = useState(false)
+    const toggleModal = () => {
+      setModal(!modal)
+    };
+
     const book = () => {
       console.log(Date())
       var g1 = new Date();
@@ -139,8 +139,16 @@ function Details() {
           window.alert("Kindly select the later dates")
           return
       }
+      else if (startDate.getDate() + 7 < endDate.getDate()){
+        window.alert("Kindly book only for 7 days")
+        return
+      }
       AuthService.getBookingConfirmation(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult).then(
-          () => { history.push('/') 
+          (x) => {  
+            console.log(x)
+            setPrice(x);
+            toggleModal()
+            history.push('/') 
           //window.location.reload(false);
           },
           error => {
@@ -210,6 +218,7 @@ function Details() {
         <br></br>
 
       <Button variant='outlined' onClick={book} >Confirm</Button>
+      {modal && <Modal price = { price }/>}
     </div>
   )
 }
