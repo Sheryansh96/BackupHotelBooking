@@ -145,8 +145,8 @@ function Details() {
       }
       AuthService.getBookingConfirmation(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult).then(
           (x) => {  
-            console.log(x)
-            setPrice(x);
+            console.log(x.data.price)
+            setPrice(x.data.price);
             toggleModal()
             history.push('/') 
           //window.location.reload(false);
