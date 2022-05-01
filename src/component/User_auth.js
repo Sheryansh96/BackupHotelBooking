@@ -55,7 +55,7 @@ class AuthService {
     //return Promise.resolve(localStorage.setItem("user", "Shreyansh"))
     console.log("Getting booking")
     return axios
-      .post(API_rewards + "/api/employees/login", {
+      .post(API_rewards + "api/employee/login", {
         email,
         password
       })
@@ -73,7 +73,7 @@ class AuthService {
   //To_register Employee
   employeeregister( username, email, password, phoneNumber) {
     console.log(username)
-    return axios.post("http://ec2-34-224-215-69.compute-1.amazonaws.com:8080/api/employee/register", {
+    return axios.post(API_rewards+"api/employee/register", {
       username,
       email,
       password,

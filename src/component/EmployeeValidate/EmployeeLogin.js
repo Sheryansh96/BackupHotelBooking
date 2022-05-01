@@ -29,7 +29,7 @@ const EmployeeLogin=()=>{
             window.alert("Please enter valid Email")
             return
         }
-        AuthService.login(userName, userPassword).then(
+        AuthService.employeelogin(userName, userPassword).then(
             () => { 
              history.push('/employee') 
                 
