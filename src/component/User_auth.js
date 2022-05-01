@@ -1,9 +1,9 @@
 import { ConstructionOutlined } from "@mui/icons-material";
 import axios from "axios";
-const API_URL = "http://ec2-52-91-219-216.compute-1.amazonaws.com:8080/api/auth/";
-const API_book = "http://ec2-52-91-219-216.compute-1.amazonaws.com:8080/hotel-booking/";
-const API_rewards = "http://ec2-52-91-219-216.compute-1.amazonaws.com:8080/";
-const API_searchHotel = "http://ec2-52-91-219-216.compute-1.amazonaws.com:8080/api/searchHotel/";
+const API_URL = "/api/auth/";
+const API_book = "/hotel-booking/";
+const API_rewards = "/";
+const API_searchHotel = "/api/searchHotel/";
 
 
 //axios.defaults.proxy.host = "http://localhost"
