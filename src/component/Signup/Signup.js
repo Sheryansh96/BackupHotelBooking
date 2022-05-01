@@ -11,6 +11,7 @@ import Axios from 'axios';
 import AuthService from '../User_auth';
 import validator from 'validator';
 import { Header } from '..';
+import { useHistory } from 'react-router-dom'; 
 
 const Signup = () => {
     const [userName, setuserNameReg] = useState("");
@@ -19,6 +20,7 @@ const Signup = () => {
     const [userPhoneno, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [succesful, setSuccesfull] = useState(false);
+    const history = useHistory();
 
     const paperStyle = { padding: '30px 20px', width: 300, margin: "20px auto" }
     const headerStyle = { margin: 0 }
@@ -37,7 +39,7 @@ const Signup = () => {
             return
         }
         AuthService.register(userName, email, userPassword, userPhoneno).then(
-            console.log("done")
+            history.push('./Login')
         ).catch((error) => {
             // Error
             if (error.response) {
