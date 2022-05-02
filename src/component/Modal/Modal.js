@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import './Modal.css';
 import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core'
+import { Button } from '@material-ui/core';
+import AuthService from '../User_auth';
 
-function Modal(price) {
+function Modal(price, id) {
   const history = useHistory();
 
   const Confirm = () =>{
@@ -11,7 +12,26 @@ function Modal(price) {
   }
 
   const Cancel = () => {
-    history.push('/update')
+    AuthService.getCancelBooking(id).then(
+      () => { 
+       history.push('/') 
+          
+       //window.location.href = "/";
+       // return <Redirect to ="/"/>
+      }).catch((error) => {
+      // Error
+      if (error.response) {
+          window.alert(error.response)
+      } else if (error.request) {
+          window.alert(error.request)
+          console.log(error.request);
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          window.alert(error.message)
+          console.log('Error', error.message);
+      }
+      console.log(error.config);
+  });
   }
   return (
     <div className="modal">

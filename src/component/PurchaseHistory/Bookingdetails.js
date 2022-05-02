@@ -63,20 +63,20 @@ function Bookingdetails() {
  
          AuthService.getBookingDetails().then(
              (x) => {
-               console.log(x.data)
-               if(x.data.roomType === "Single_Room"){
-                 room = "Single Room"
-               }
-               else if(x.data.roomType === "Family_Lounge"){
-                 room = "Family Lounge"
-               }
-               else if(x.data.roomType === "double_room"){
-                 room = "Double Room"
-               }
-               else{
-                 room = "Suite"
-               }
-             setData(x.data)
+                  console.log(x.data)
+                  if(x.data.roomType === "Single_Room"){
+                    room = "Single Room"
+                  }
+                  else if(x.data.roomType === "Family_Lounge"){
+                    room = "Family Lounge"
+                  }
+                  else if(x.data.roomType === "double_room"){
+                    room = "Double Room"
+                  }
+                  else{
+                    room = "Suite"
+                  }
+                setData(x.data)
              },
              error => {
                  const resMessage =

@@ -145,10 +145,10 @@ function Details() {
       }
       AuthService.getBookingConfirmation(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult).then(
           (x) => {  
-            console.log(x.data.price)
-            setPrice(x.data.price);
+            console.log(x.price)
+            setPrice(x.price, x.reservationID);
             toggleModal()
-            history.push('/') 
+            console.log("What a wow!!!!")
           //window.location.reload(false);
           },
           error => {

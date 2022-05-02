@@ -2,5 +2,5 @@
     padding: 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 450px);
+    grid-template-rows: repeat(3, 550px);
   }

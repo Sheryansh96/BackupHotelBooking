@@ -16,26 +16,35 @@ function Bookcard({ src, title, to_date, from_date, description }) {
   }
 
   const cancel = () => {
-    AuthService.getCancelBooking(description).then(
-      () => { 
-       history.push('/') 
-          
-       //window.location.href = "/";
-       // return <Redirect to ="/"/>
-      }).catch((error) => {
-      // Error
-      if (error.response) {
-          window.alert(error.response)
-      } else if (error.request) {
-          window.alert(error.request)
-          console.log(error.request);
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          window.alert(error.message)
-          console.log('Error', error.message);
-      }
-      console.log(error.config);
-  });
+    if (window.confirm('Do you really want to cancel this booking?'))
+    {
+      // They clicked Yes
+      AuthService.getCancelBooking(description).then(
+        () => { 
+         history.push('/') 
+         //window.location.href = "/";
+         // return <Redirect to ="/"/>
+        }).catch((error) => {
+        // Error
+        if (error.response) {
+            window.alert(error.response)
+        } else if (error.request) {
+            window.alert(error.request)
+            console.log(error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            window.alert(error.message)
+            console.log('Error', error.message);
+        }
+        console.log(error.config);
+    });
+    }
+    else
+    {
+        // They clicked no
+        history.push('/booked')
+    }
+    
   }
 
   return (

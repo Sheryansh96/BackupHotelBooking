@@ -97,8 +97,20 @@ class AuthService {
 
   getHotelLocation(location){
     console.log(location)
+    let x = localStorage.getItem('user')
+    let email = x;
+    email = email.replace(/\"/g,'')
+    let token = localStorage.getItem('token');
+    token = token.replace(/\"/g,'')
+    console.log(token)
+    let yourConfig = {
+      headers: {
+          'Content-Type' : 'application/json',
+         'Authorization': "Bearer " + token,
+      }
+   }
     return axios
-    .get(API_searchHotel+location)
+    .get(API_searchHotel+location,yourConfig)
       .then(response => {
               console.log(response)
                return response;
@@ -291,7 +303,7 @@ class AuthService {
       }
    }
     return axios
-        .get(API_book+"cancel/"+ description, yourConfig)
+        .delete(API_book+"cancel/"+ description,yourConfig)
           .then(response => {
                   console.log(response)
                    return response;
