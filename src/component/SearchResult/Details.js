@@ -18,11 +18,12 @@ function Details() {
     const [pool, setCheckedPool] = React.useState(false);
     const [park, setCheckedParking] = React.useState(false);
     const [meals, setCheckedMeals] = React.useState(false);
-    const [room, setRoomType] = React.useState(false);
+    const [room, setRoomType] = useState("single_room");
     const [rooms, setRooms] = useState(1);
     const [child, setChild] = useState(1);
     const [adult,setAdult] = useState(1);
     const [price, setPrice] = useState("");
+    const [res, setReservation] = useState("");
     const history = useHistory();
 
     
@@ -145,8 +146,10 @@ function Details() {
       }
       AuthService.getBookingConfirmation(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult).then(
           (x) => {  
-            console.log(x.price)
-            setPrice(x.price, x.reservationID);
+            console.log("REVERVATIONID")
+            console.log(x.reservationID)
+            setPrice(x.price);
+            setReservation(x.reservationID);
             toggleModal()
             console.log("What a wow!!!!")
           //window.location.reload(false);
@@ -180,11 +183,13 @@ function Details() {
         <br></br>
         <h3>Room Type <BedroomParentIcon /></h3>
         <div onChange = {roomType}>
-          <input type="radio" value="Single" name="room"/> Single Room
+          <input type="radio" value="single_room" name="room" defaultChecked/> Single Room
           <br></br>
-          <input type="radio" value="Double" name="room"/> Double Room
+          <input type="radio" value="double_room" name="room"/> Double Room
           <br></br>
-          <input type="radio" value="Suite" name="room"/> Suite
+          <input type="radio" value="suite" name="room"/> Suite
+          <br></br>
+          <input type="radio" value="Family_lounge" name="room"/> Family Lounge
         </div>
         <br></br>
         <br></br>
@@ -218,7 +223,7 @@ function Details() {
         <br></br>
 
       <Button variant='outlined' onClick={book} >Confirm</Button>
-      {modal && <Modal price = { price }/>}
+      {modal && <Modal price = { price } res = { res }/>}
     </div>
   )
 }

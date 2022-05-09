@@ -60,7 +60,7 @@ function Bookingdetails() {
      let room = "Single Room"
      useEffect(() => {
          //setData(cars)
- 
+         console.log("Updated")
          AuthService.getBookingDetails().then(
              (x) => {
                   console.log(x.data)
@@ -96,6 +96,15 @@ function Bookingdetails() {
                  from_date ={dataU.fromDate}
                  to_date = {dataU.toDate}
                  description={dataU.reservationID}
+                //  breakfast = {dataU.amenities.daily_continental_breakfast}
+                //  fitness = {dataU.amenities.access_to_fitness_room} 
+                //  pool = {dataU.amenities.access_to_swimming_Pool_Jacuzzi} 
+                //  parking = {dataU.amenities.daily_parking} 
+                //  meals = {dataU.amenities.all_meals_included}
+                //  nor = {dataU.numberOfRooms}
+                //  noa = {dataU.number_of_adults}
+                //  noc = {dataU.number_of_children}
+                cdata = {dataU}
             />
         )
         

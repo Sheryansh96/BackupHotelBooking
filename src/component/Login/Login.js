@@ -19,6 +19,9 @@ const Login=()=>{
     const avatarStyle={backgroundColor:'#ff7779'}
     const btnstyle={margin:'8px 0'}
 
+
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
     const register = () => {
         setLoading(true)
         if( userName == "" || userPassword == ""){
@@ -47,7 +50,7 @@ const Login=()=>{
                 window.alert("Enter correct email/password")
                 console.log('Error', error.message);
             }
-            console.log(error.config);
+            console.log(error.response);
         });
     }
 

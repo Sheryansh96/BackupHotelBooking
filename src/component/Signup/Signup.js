@@ -27,6 +27,7 @@ const Signup = () => {
     const avatarStyle = { backgroundColor: '#ff7779' }
     const marginTop = { marginTop: 5 }
     
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
     const register = (event) => {
         event.preventDefault();
@@ -38,21 +39,28 @@ const Signup = () => {
             window.alert("Please enter valid Email")
             return
         }
+        if(!regularExpression.test(userPassword)){
+            window.alert("Keep special chars in the password and length greater than 6")
+            return
+        }
         AuthService.register(userName, email, userPassword, userPhoneno).then(
+            (x) => {
             history.push('./Login')
+            }
         ).catch((error) => {
             // Error
+            let x = error.response.data
             if (error.response) {
-                window.alert("Enter correct email/password")
+                window.alert(x)
             } else if (error.request) {
-                window.alert("Enter correct email/password")
-                console.log(error.request);
+                window.alert(x)
+                console.log(error.response);
             } else {
                 // Something happened in setting up the request that triggered an Error
-                window.alert("Enter correct email/password")
+                window.alert(x)
                 console.log('Error', error.message);
             }
-            console.log(error.config);
+            console.log(error.response.data);
         });
     }
 

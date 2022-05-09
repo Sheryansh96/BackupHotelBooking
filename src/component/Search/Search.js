@@ -36,7 +36,12 @@ function Search() {
         AuthService.getHotelLocation(location).then(
           (x) => {
             console.log(x)
+            if(!AuthService.validUser()){
+                window.alert("Please Login")
+              }
+              else{
             history.push('/search')
+              }
            }).catch((error) => {
            // Error
            if (error.response) {

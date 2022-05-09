@@ -44,10 +44,12 @@ class AuthService {
       password,
       phoneNumber,
     }).then(response => {
-      console.log(response);
-    }).catch(e=> {
-      console.log(e);
-    });
+      return response
+    })
+    // ).catch(e=> {
+    //   //window.alert(e)
+    //   console.log(e);
+    // });
   }
 
   //To_login employee
@@ -62,9 +64,7 @@ class AuthService {
       .then(response => {
         if (response) {
           console.log(response.data.username)
-          localStorage.setItem("user", JSON.stringify(response.data.username));
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-          
+          localStorage.setItem("user", "Employee");
         }
         return response.data;
       });
@@ -88,7 +88,7 @@ class AuthService {
   //To_getBooking for Employee
   getBookingEmployee(){
     return axios
-        .get(API_book+"getBooking")
+        .get(API_rewards+"api/getBooking")
           .then(response => {
                   console.log(response)
                    return response;
@@ -96,32 +96,19 @@ class AuthService {
   }
 
   getHotelLocation(location){
-    console.log(location)
-    let x = localStorage.getItem('user')
-    let email = x;
-    email = email.replace(/\"/g,'')
-    let token = localStorage.getItem('token');
-    token = token.replace(/\"/g,'')
-    console.log(token)
-    let yourConfig = {
-      headers: {
-          'Content-Type' : 'application/json',
-         'Authorization': "Bearer " + token,
-      }
-   }
     return axios
-    .get(API_searchHotel+location,yourConfig)
+    .get(API_searchHotel+location)
       .then(response => {
               console.log(response)
                return response;
       })
   }
   //To_AddHotel Employee
-  postemployeeHotel(location,name,id){
+  postemployeeHotel(location,hotelName,id){
     return axios
-      .post(API_book + "employee", {
+      .post(API_rewards + "api/savehotel", {
         location,
-        name,
+        hotelName,
         id
       })
       .then(response => {
@@ -138,13 +125,20 @@ class AuthService {
   getBalanceUser(){
     //return Promise.resolve(JSON.stringify({"balance":1000}));
     let x = localStorage.getItem('user')
-    let email = x.username;
+    let email = x;
+    email = email.replace(/\"/g,'')
+    let token = localStorage.getItem('token');
+    token = token.replace(/\"/g,'')
+    console.log(token)
+    let yourConfig = {
+      headers: {
+          'Content-Type' : 'application/json',
+         'Authorization': "Bearer " + token,
+      }
+   }
     return axios
-      .post(API_rewards + "rewards/"+email)
+      .get(API_book + "getRewardPoints/"+email, yourConfig)
        .then(response => {
-         if (response.data.accessToken) {
-           localStorage.setItem("balance", JSON.stringify(response.data));
-         }
          return response.data;
        });
   }

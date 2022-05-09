@@ -2,7 +2,7 @@
   "name": "airbnb-clone",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://ec2-52-91-219-216.compute-1.amazonaws.com:8080",
+  "proxy":"http://ec2-54-88-110-151.compute-1.amazonaws.com:8080",
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",

@@ -55,21 +55,22 @@ function EmployeeAdd() {
         <br></br>
         <TextField
         id="first-name"
-        label="Name"
         placeholder = "New Location"
         margin="normal"
         onChange = {(e)=> {setDetails(e.target.value)}} required
         />
+        <br></br>
+        <br></br>
         <TextField
         id="first-name"
-        label="Name"
         placeholder = "New hotel name"
         margin="normal"
         onChange = {(e)=> {setName(e.target.value)}} required
         />
+        <br></br>
+        <br></br>
         <TextField
         id="first-name"
-        label="Name"
         placeholder = "New id"
         margin="normal"
         onChange = {(e)=> {setId(e.target.value)}} required

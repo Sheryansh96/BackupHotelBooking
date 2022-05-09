@@ -8,7 +8,9 @@ import RoomServiceIcon from '@mui/icons-material/RoomService';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
-import { Header } from '..'
+import { Header } from '..';
+import { Modal } from '..';
+import { red } from '@material-ui/core/colors';
 
 function Update() {
 
@@ -18,29 +20,46 @@ function Update() {
     //     access_to_swimming_Pool_Jacuzzi,
     //     daily_parking,
     //     all_meals_included
+
     const[curr, setCurr] = useState([]);
-    const[breakfast_book, setBreak] = useState("Yes");
+    const[breakfast_book, setBreak] = useState("No");
     const[fit_book, setFit] = useState("No");
     const[swim_book, setSwim] = useState("No");
     const[park_book, setPark] = useState("No");
     const[meal_book, setMeal] = useState("No");
+    const [price, setPrice] = useState("");
+    const [res, setReservation] = useState("");
+    const [query,setQuery] = useState("");
+    const [modal, setModal] = useState(false)
 
-    const { search } = useLocation()
-    const {query} = queryString.parse(search)
+    const [state, setState] = useState([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection"
+      }
+    ]);
+    
+    //const { search } = useLocation()
+    //const {query} = queryString.parse(search)
+    const location = useLocation() 
 
-    let x = {
-        "fromDate" : "2022-04-30",
-        "toDate" : "2022-05-07",
-        "amenities": {
-            "daily_continental_breakfast":true,
-            "access_to_fitness_room":false,
-            "access_to_swimming_Pool_Jacuzzi":true,
-            "daily_parking":true,
-            "all_meals_included":false
-          }
-    }
+    // let x = {
+    //     "fromDate" : "2022-04-30",
+    //     "toDate" : "2022-05-07",
+    //     "amenities": {
+    //         "daily_continental_breakfast":true,
+    //         "access_to_fitness_room":false,
+    //         "access_to_swimming_Pool_Jacuzzi":true,
+    //         "daily_parking":true,
+    //         "all_meals_included":false
+    //       }
+    // }
 
     useEffect(() => {
+        console.log(location.state.detail)
+        setQuery(location.state.detail.reservationID)
+        let x = location.state.detail
         setCurr(x)
         if(x.amenities.daily_continental_breakfast){
             setBreak("Yes")
@@ -52,11 +71,14 @@ function Update() {
             setSwim("Yes")
         }
         if(x.amenities.daily_parking){
-            setSwim("Yes")
+          setPark("Yes")
         }
         if(x.amenities.all_meals_included){
-            setSwim("Yes")
+          setMeal("Yes")
         }
+        setRooms(x.numberOfRooms)
+        setChild(x.number_of_children)
+        setAdult(x.number_of_adults)
         // AuthService.getBookingDetails().then(
         //         (x) => {
         //             setCurr(x)
@@ -74,18 +96,18 @@ function Update() {
      }, [])
 
 
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [breakfast, setCheckedBF] = React.useState(false);
-    const [fit, setCheckedFit] = React.useState(false);
-    const [pool, setCheckedPool] = React.useState(false);
-    const [park, setCheckedParking] = React.useState(false);
-    const [meals, setCheckedMeals] = React.useState(false);
-    const [room, setRoomType] = React.useState(false);
-    const [rooms, setRooms] = useState(1);
-    const [child, setChild] = useState(1);
-    const [adult,setAdult] = useState(1);
+//location.state.detail.fromDate
+    const [startDate, setStartDate] = useState(new Date(location.state.detail.fromDate));
+    const [endDate, setEndDate] = useState(new Date(location.state.detail.toDate));
+    const [breakfast, setCheckedBF] = React.useState(location.state.detail.amenities.daily_continental_breakfast);
+    const [fit, setCheckedFit] = React.useState(location.state.detail.amenities.access_to_fitness_room);
+    const [pool, setCheckedPool] = React.useState(location.state.detail.amenities.access_to_swimming_Pool_Jacuzzi);
+    const [park, setCheckedParking] = React.useState(location.state.detail.amenities.daily_parking);
+    const [meals, setCheckedMeals] = React.useState(location.state.detail.amenities.all_meals_included);
+    const [room, setRoomType] = React.useState(location.state.detail.roomType);
+    const [rooms, setRooms] = useState(location.state.detail.numberOfRooms);
+    const [child, setChild] = useState(location.state.detail.number_of_children);
+    const [adult,setAdult] = useState(location.state.detail.number_of_adults);
     const history = useHistory();
 
     
@@ -191,6 +213,10 @@ function Update() {
         setEndDate(ranges.selection.endDate);
     }
 
+    const toggleModal = () => {
+      setModal(!modal)
+    };
+
     const UpdateBook = () => {
         var g1 = new Date();
         if(startDate.getTime() < g1.getTime()){
@@ -198,7 +224,15 @@ function Update() {
             return
         }
         AuthService.getUserUpdate(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult, query).then(
-            () => { history.push('/') 
+            (x) => { 
+              console.log("Wasssssssssup")
+              console.log(x.price)
+              setPrice(x.price);
+              // x.reservationID
+              setReservation(x.reservationID)
+              toggleModal()
+              
+              //history.push('/booked') 
             //window.location.reload(false);
             },
             error => {
@@ -253,27 +287,29 @@ function Update() {
         <h2>Please Update your booking</h2>
         <br></br>
         <br></br>
-        <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
+        <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} showpreview={curr.fromDate, curr.toDate, red}/>
         <h3>Amenities <RoomServiceIcon /></h3>
-        <input type="checkbox" checked={breakfast} onChange={setCheckedOne}/> Daily Continental Breakfast
+        <input type="checkbox" defaultChecked={location.state.detail.amenities.daily_continental_breakfast} onChange={setCheckedOne}/> Daily Continental Breakfast
         <br></br>
-        <input type="checkbox" checked={fit} onChange={setCheckedTwo}/> Access to fitness room
+        <input type="checkbox" defaultChecked={location.state.detail.amenities.access_to_fitness_room} onChange={setCheckedTwo}/> Access to fitness room
         <br></br>
-        <input type="checkbox" checked={pool} onChange={setCheckedThree}/> Access to Swimming Pool/Jacuzzi
+        <input type="checkbox" defaultChecked={location.state.detail.amenities.access_to_swimming_Pool_Jacuzzi} onChange={setCheckedThree}/> Access to Swimming Pool/Jacuzzi
         <br></br>
-        <input type="checkbox" checked={park} onChange={setCheckedFour}/> Daily Parking
+        <input type="checkbox" defaultChecked={location.state.detail.amenities.daily_parking} onChange={setCheckedFour}/> Daily Parking
         <br></br>
-        <input type="checkbox" checked={meals} onChange={setCheckedFive}/> All meals included (Breakfast, Lunch, Dinner)
+        <input type="checkbox" defaultChecked={location.state.detail.amenities.all_meals_included} onChange={setCheckedFive}/> All meals included (Breakfast, Lunch, Dinner)
         <br></br>
         <br></br>
         <br></br>
         <h3>Room Type <BedroomParentIcon /></h3>
         <div onChange = {roomType}>
-          <input type="radio" value="Single" name="room"/> Single Room
+          <input type="radio" value="single_room" name="room" defaultChecked = {location.state.detail.roomType == "single_room"}/> Single Room
           <br></br>
-          <input type="radio" value="Double" name="room"/> Double Room
+          <input type="radio" value="double_room" name="room" defaultChecked = {location.state.detail.roomType == "double_room"}/> Double Room
           <br></br>
-          <input type="radio" value="Suite" name="room"/> Suite
+          <input type="radio" value="suite" name="room" defaultChecked = {location.state.detail.roomType == "suite"}/> Suite
+          <br></br> 
+          <input type="radio" value="Family_lounge" name="room" defaultChecked = {location.state.detail.roomType == "Family_lounge"}/> Family Lounge
         </div>
         <br></br>
         <br></br>
@@ -307,6 +343,7 @@ function Update() {
         <br></br>
         <span>
         <Button onClick = {UpdateBook}>Confirm</Button>
+        {modal && <Modal price = { price } res = { res }/>}
         </span>
         </div>
     </div>

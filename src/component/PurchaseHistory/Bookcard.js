@@ -6,13 +6,17 @@ import Details from '../SearchResult/Details';
 import { useHistory } from 'react-router-dom'; 
 import AuthService from '../User_auth';
 
-function Bookcard({ src, title, to_date, from_date, description }) {
+function Bookcard({ src, title, to_date, from_date, description, cdata}) {
   const [showSearch, setShowSearch] = useState(false);
   const history = useHistory();
-
+  let cdate = new Date()
+  let tod = new Date(to_date)
   const update = () => {
+    console.log(cdata)
     history.push( {pathname: '/update',
-    search: `?query=${description}`}) 
+    //search: `?query=${description}`, 
+    state : {detail: cdata}
+    }) 
   }
 
   const cancel = () => {
@@ -21,7 +25,7 @@ function Bookcard({ src, title, to_date, from_date, description }) {
       // They clicked Yes
       AuthService.getCancelBooking(description).then(
         () => { 
-         history.push('/') 
+         history.push('/booked') 
          //window.location.href = "/";
          // return <Redirect to ="/"/>
         }).catch((error) => {
@@ -56,10 +60,19 @@ function Bookcard({ src, title, to_date, from_date, description }) {
         <h4>To : {to_date}</h4>
         <h5>Id : {description}</h5>
     </div>
+    {
+    
+    (tod.getTime() > cdate.getTime())?
+    <>
     <span>
     <Button onClick ={update} >Update</Button>
     </span>
     <Button onClick ={cancel}>Cancel</Button>
+    </>
+    :
+    ''
+    
+    }
     </div>
   )
 }

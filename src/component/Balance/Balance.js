@@ -11,9 +11,8 @@ function Balance() {
     const balance = () =>{
         AuthService.getBalanceUser().then((e) => 
             {
-                let obj = JSON.parse(e)
-                console.log(obj.balance)
-                setBalance(obj.balance)
+                console.log(e)
+                setBalance(e)
             }
         )
     }
@@ -22,10 +21,7 @@ function Balance() {
     <Header/>
     <div className='reward'>
         <div className='card_class'>
-        <h2>
-            Thank you for being a loyal customer. Your current reward points are
-            <br></br>
-        </h2>
+        <h2>Thank you</h2>
         <span>
              {cbalance}
         </span>
