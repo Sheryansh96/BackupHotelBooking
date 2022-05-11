@@ -36,7 +36,7 @@ function Modal(price, res) {
   }
 
   let button = <h2></h2>
-  if (price < 0) {
+  if (price.price < 0) {
     button = <h2>Your will be refunded { Math.abs(price.price) } </h2>;
   } else {
     button = <h2>This is the extra amount to be paid. { Math.abs(price.price) } </h2>;
