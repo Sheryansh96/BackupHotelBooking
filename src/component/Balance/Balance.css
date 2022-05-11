@@ -16,7 +16,10 @@
 }
 
 .card_class{
-    margin: 20%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
@@ -36,3 +39,9 @@
     margin-left: 30%;
     font-size: 30px;
 }
+
+.home__section {
+    display: flex;
+    padding: 30px;
+    background-color: seashell !important;
+  }

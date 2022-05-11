@@ -144,6 +144,10 @@ function Details() {
         window.alert("Kindly book only for 7 days")
         return
       }
+      else if( room== "single_room" && rooms ==1 && (child > 2 || adult > 2)){
+        window.alert("Max of 2 adults or children allowed")
+        return
+      }
       AuthService.getBookingConfirmation(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult).then(
           (x) => {  
             console.log("REVERVATIONID")

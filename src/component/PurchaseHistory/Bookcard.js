@@ -25,7 +25,7 @@ function Bookcard({ src, title, to_date, from_date, description, cdata}) {
       // They clicked Yes
       AuthService.getCancelBooking(description).then(
         () => { 
-         history.push('/booked') 
+          window.location.reload(false);
          //window.location.href = "/";
          // return <Redirect to ="/"/>
         }).catch((error) => {

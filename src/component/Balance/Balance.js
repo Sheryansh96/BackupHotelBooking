@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { AuthService } from '..';
 import { Header } from '..';
 import './Balance.css';
+import Card from '../Card/Card'
 
 function Balance() {
     const [cbalance, setBalance] = useState(250)
@@ -27,7 +28,25 @@ function Balance() {
         </span>
         </div>
         {/* <button onClick = {()=>{balance()}} ></button> */}
+        <div className='home__section'>
+            <Card
+                src ="amazon.png"
+                title="Amazon"
+                description="Claim Reward here"
+            />
+            <Card
+                src="ebay.png"
+                title="eBay"
+                description="Claim Reward here"
+            />
+            <Card
+                src="uber.png"
+                title="UBER"
+                description="Claim Reward here"
+            />
+        </div>
     </div>
+   
     </div>
   )
 }

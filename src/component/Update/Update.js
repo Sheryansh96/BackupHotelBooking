@@ -223,6 +223,14 @@ function Update() {
             window.alert("Kindly select the later dates")
             return
         }
+        else if (startDate.getDate() + 7 < endDate.getDate()){
+          window.alert("Kindly book only for 7 days")
+          return
+        }
+        else if( room== 'single room' && rooms ==1 && (child > 2 || adult > 2)){
+          window.alert("Max of 2 adults or children allowed")
+          return
+        }
         AuthService.getUserUpdate(room, startDate, endDate, breakfast, fit, pool, park, meals, rooms, child, adult, query).then(
             (x) => { 
               console.log("Wasssssssssup")

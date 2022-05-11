@@ -32,6 +32,8 @@ class AuthService {
 
   //To_logout User
   logout() {
+    localStorage.removeItem('user')
+    localStorage.removeItem('employee')
     return Promise.resolve(localStorage.removeItem('user'));
   }
 
@@ -64,7 +66,7 @@ class AuthService {
       .then(response => {
         if (response) {
           console.log(response.data.username)
-          localStorage.setItem("user", "Employee");
+          localStorage.setItem("employee", "Present");
         }
         return response.data;
       });
@@ -309,9 +311,10 @@ class AuthService {
       //var x = JSON.parse(localStorage.getItem('user'));
       var x = JSON.stringify(localStorage.getItem('user'))
       var y = localStorage.getItem('user');
+      var z = localStorage.getItem('employee')
       console.log("Valid User")
-      console.log(y)
-      if(y == null){
+      console.log(z)
+      if(y == null && z == null){
           return false
       }
       else{

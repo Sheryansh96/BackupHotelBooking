@@ -64,12 +64,17 @@ function Account() {
       </div>
       {isActive && (
         <div className = "dropdown_content">
+          {localStorage.getItem("employee") == null ?
+          <> 
           <div className = "dropdown_item" onClick = {() => booking()}>
               Booking
           </div>
           <div className = "dropdown_item" onClick = {() => bal()}>
-              Balance
+              Rewards
           </div>
+          </>:
+          ''
+          }
           <div className = "dropdown_item" onClick = {() => logout_page()}>
               Logout
           </div>
