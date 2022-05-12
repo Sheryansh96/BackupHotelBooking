@@ -286,6 +286,7 @@ class AuthService {
 
   //To cancel booking for the user
   getCancelBooking(description){
+    console.log("Here n delete")
     let x = localStorage.getItem('user')
     let email = x;
     email = email.replace(/\"/g,'')

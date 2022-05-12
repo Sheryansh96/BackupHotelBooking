@@ -50,6 +50,36 @@ function Employee() {
         ]
         setBookingHistory(history);
     }
+
+    
+
+    const deleteBooking = (id) => {
+      console.log("Cancelling")
+      console.log(id)
+      AuthService.getCancelBooking(id, localStorage.getItem('user')).then(
+        () => { 
+          console.log("Hello")
+          window.location.reload(false);
+         //window.location.href = "/";
+         // return <Redirect to ="/"/>
+        }).catch((error) => {
+        // Error
+        if (error.response) {
+            window.alert(error.response)
+        } else if (error.request) {
+            window.alert(error.request)
+            console.log(error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            window.alert(error.message)
+            console.log('Error', error.message);
+        }
+        console.log(error.config);
+    });
+    }
+
+
+
     const users=bookingHistory.map((pro)=>{
       return (
         <div>
@@ -78,7 +108,6 @@ function Employee() {
                 <p className="card-title"> {pro.number_of_adults ? pro.number_of_adults: 0 } </p>
                 <h5 style={{marginTop:"5px" }}> Number of Childen:</h5>
                 <p className="card-title"> {pro.number_of_children ? pro.number_of_children: 0} </p>
-
               </div>
             </div>
           </div>

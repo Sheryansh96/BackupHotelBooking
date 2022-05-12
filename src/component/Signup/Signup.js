@@ -18,6 +18,7 @@ const Signup = () => {
     const [userPassword, setuserPassword] = useState("");
     const [userGender, setGender] = useState("");
     const [userPhoneno, setPhoneNumber] = useState("");
+    const [confirmPassword, setconfirmPassword] = useState("");
     const [email, setEmail] = useState("");
     const [succesful, setSuccesfull] = useState(false);
     const history = useHistory();
@@ -41,6 +42,10 @@ const Signup = () => {
         }
         if(!regularExpression.test(userPassword)){
             window.alert("Keep special chars in the password and length greater than 6")
+            return
+        }
+        if(confirmPassword != userPassword){
+            window.alert("Password is not matching")
             return
         }
         AuthService.register(userName, email, userPassword, userPhoneno).then(
@@ -88,7 +93,7 @@ const Signup = () => {
                     </FormControl>
                     <TextField fullWidth label='Phone Number' onChange = {(e)=> {setPhoneNumber(e.target.value)}} placeholder="Enter your phone number" />
                     <TextField fullWidth label='Password' onChange = {(e)=> {setuserPassword(e.target.value)}} placeholder="Enter your password"/>
-                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password"/>
+                    <TextField fullWidth label='Confirm Password' onChange = {(e)=> {setconfirmPassword(e.target.value)}} placeholder="Confirm your password"/>
                     <FormControlLabel
                         control={<Checkbox name="checkedA" />}
                         label="I accept the terms and conditions."
