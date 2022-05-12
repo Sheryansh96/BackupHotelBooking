@@ -81,10 +81,8 @@ class AuthService {
       password,
       phoneNumber,
     }).then(response => {
-      console.log(response);
-    }).catch(e=> {
-      console.log(e);
-    });
+      return response
+    })
   }
 
   //To_getBooking for Employee

@@ -49,20 +49,23 @@ const EmployeeSignup = () => {
             return
         }
         AuthService.employeeregister(userName, email, userPassword, userPhoneno).then(
-            history.push('/employeelogin') 
+            (x) => {
+            history.push('./employeelogin')
+            }
         ).catch((error) => {
             // Error
+            let x = error.response.data
             if (error.response) {
-                window.alert(error.response)
+                window.alert(x)
             } else if (error.request) {
-                window.alert(error.request)
-                console.log(error.request);
+                window.alert(x)
+                console.log(error.response);
             } else {
                 // Something happened in setting up the request that triggered an Error
-                window.alert(error.message)
+                window.alert(x)
                 console.log('Error', error.message);
             }
-            console.log(error.config);
+            console.log(error.response.data);
         });
     }
 
