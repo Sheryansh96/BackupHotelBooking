@@ -5,7 +5,7 @@ import './Balance.css';
 import Card from '../Card/Card'
 
 function Balance() {
-    const [cbalance, setBalance] = useState(250)
+    const [cbalance, setBalance] = useState(0)
     useEffect(() => {
         balance()
      }, [])
@@ -22,7 +22,7 @@ function Balance() {
     <Header/>
     <div className='reward'>
         <div className='card_class'>
-        <h2>Thank you</h2>
+        <h2>Thank you for staying with us.</h2>
         <span>
              {cbalance}
         </span>
