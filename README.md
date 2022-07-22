@@ -22,12 +22,12 @@
 
 # Usecase Diagram:
 
-![](Usecase_Diagram.png)
+![](https://github.com/gopinathsjsu/team-project-incognito/blob/main/Usecase_Diagram.png)
 
 
 # Architecture Diagram:
 
-![](Architecture_Diagram.png)
+![](https://github.com/gopinathsjsu/team-project-incognito/blob/main/Architecture_Diagram.png)
 
 # Component Diagram:
 
