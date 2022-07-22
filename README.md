@@ -24,35 +24,6 @@
 
 ![](Usecase_Diagram.png)
 
-# UI WireFrame
-
-* Register
-
-![Register](/Wireframes/Signuppage.png)</br>
-
-* Login
-
-![Login](/Wireframes/LoginPage.png)</br>
-
-* Search Rooms
-
-![SearchRooms](/Wireframes/SearchHotels.png)</br>
-
-* Manage Booking
-
-![ManageBooking](/Wireframes/ManageBooking.png)</br>
-
-* Home Page
-
-![HomePage](/Wireframes/HomePage.png)</br>
-
-* Admin add rooms
-
-![adminAddRooms](/Wireframes/adminAddRooms.png)</br>
-
-* Admin manage booking
-
-![adminManageBooking](/Wireframes/adminManageBookin.png)<br>
 
 # Architecture Diagram:
 
