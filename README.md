@@ -1,71 +1,86 @@
-# Getting Started with Create React App
+# Tools Used:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ * Frontend: React JS
+ * Backend: SpringBoot
+ * Database: MongoDB
+ * docker 
+ * REST API: Postman (for testing developed APIs)
+ * Cloud: Amazon Web Services (AWS) EC2 Cluster
 
-## Available Scripts
+# Schedule for Scrum Meetings:
 
-In the project directory, you can run:
+ * Friday
+ * Tuesday
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# XP Core Values:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ * Communication
+ * Courage
+ * Simplicity
+ * FeedBack
 
-### `npm test`
+# Usecase Diagram:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![](Usecase_Diagram.png)
 
-### `npm run build`
+# UI WireFrame
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Register
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Register](/Wireframes/Signuppage.png)</br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Login
 
-### `npm run eject`
+![Login](/Wireframes/LoginPage.png)</br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Search Rooms
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![SearchRooms](/Wireframes/SearchHotels.png)</br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* Manage Booking
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![ManageBooking](/Wireframes/ManageBooking.png)</br>
 
-## Learn More
+* Home Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![HomePage](/Wireframes/HomePage.png)</br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Admin add rooms
 
-### Code Splitting
+![adminAddRooms](/Wireframes/adminAddRooms.png)</br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* Admin manage booking
 
-### Analyzing the Bundle Size
+![adminManageBooking](/Wireframes/adminManageBookin.png)<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Architecture Diagram:
 
-### Making a Progressive Web App
+![](Architecture_Diagram.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Component Diagram:
 
-### Advanced Configuration
+![](https://github.com/gopinathsjsu/team-project-incognito/blob/main/Component_Diagram.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Design Decision:
 
-### Deployment
+## Application Level:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Admin Features:
 
-### `npm run build` fails to minify
+    1. Signin
+    2. View all Bookings
+    3. Add new Location for each Hotel
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# BackupHotelBooking
+### User Features:
+
+    1. Signup/ Signin
+    2. Search for Hotel Location
+    3. Select the booking Date and the amenities
+    4. View all the Booking
+    5. Update the booking
+    6. Delete the booking
+    7. View his current Reward Points
+
+
+
